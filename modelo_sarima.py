@@ -1,12 +1,12 @@
-from statsmodels.tsa.arima_model import ARIMA
+from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 def modelo_arima(df):
-    from statsmodels.tsa.statespace.sarimax import SARIMAX
+
 
     # instanciar modelo
-    model=ARIMA(df,order=(2,1,2))
+    model=SARIMAX(df,order=(1,0,0))
     # ajustar modelo
-    results = model.fit()
-
+    results = model.fit(disp=0)
+    prediccion=results.get_prediction(start=df.index[1], dynamic=False)
     # mirar el AIC
-    return results.summary()
+    return prediccion
