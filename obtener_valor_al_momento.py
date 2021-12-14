@@ -19,6 +19,7 @@ contador=0
 df=pd.DataFrame(columns=['high', 'last', 'timestamp', 'bid', 'vwap', 'volume', 'low', 'ask', 'open'])
 
 
+
 validador=True
 while validador==True:
     df=df.append(getBtc(),ignore_index=True)
@@ -42,11 +43,10 @@ while validador==True:
 
 
         if len(df_diff)>6:
-            print(df)
-            df=df.asfreq(freq='10S',method='bfill')
-            print(df)
-            prediccion=modelo_arima(df['last'])
-            prediccion.predicted_mean.plot(ax=ax1, label='prediccion', alpha=.7)
+            df=df.asfreq(freq='20S',method='bfill')
+            prediccion,pre_futura=modelo_arima(df,120)
+            prediccion.predicted_mean.plot(ax=ax1, label='prediccion',style='o', alpha=.7)
+            pre_futura.predicted_mean.plot(ax=ax1, label='prediccion', style='o', alpha=.7,color='r')
 
 
 
@@ -54,7 +54,7 @@ while validador==True:
     contador+=1
     plt.show()
 
-    time.sleep(10)
+    time.sleep(20)
 
 
 
