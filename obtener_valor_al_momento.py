@@ -29,14 +29,14 @@ while validador==True:
     df['last']=df['last'].astype(float)
     df.set_index(df['time'],inplace=True)
     df = df.drop_duplicates()
-    ax1.plot(df['time'][:],df['last'][:],labels='Datos reales')
+    ax1.plot(df['time'][:],df['last'][:],label='Datos reales')
 
 
     if len(df)>1:
 
         df_diff = df.diff().dropna()
         df_diff.set_index(df['time'][1:],inplace=True)
-        ax2.plot(df['time'][1:],df_diff['last']/df_diff['timestamp'],labels='Pendiente')
+        ax2.plot(df['time'][1:],df_diff['last']/df_diff['timestamp'],label='Pendiente')
 
 
 
