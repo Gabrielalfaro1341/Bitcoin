@@ -21,6 +21,7 @@ df=pd.DataFrame(columns=['high', 'last', 'timestamp', 'bid', 'vwap', 'volume', '
 
 
 validador=True
+paso=False
 while validador==True:
     df=df.append(getBtc(),ignore_index=True)
     fig, (ax1, ax2) = plt.subplots(2, 1)
@@ -29,7 +30,8 @@ while validador==True:
     df['last']=df['last'].astype(float)
     df.set_index(df['time'],inplace=True)
     df = df.drop_duplicates()
-    ax1.plot(df['time'][:],df['last'][:],label='Datos reales')
+    ax1.plot(df['time'][-100:],df['last'][-100:],label='Datos reales')
+    print(df)
 
 
     if len(df)>1:
@@ -43,23 +45,28 @@ while validador==True:
 
 
         if len(df_diff)>100:
+            paso=True
             df = df.asfreq(freq='20S', method='bfill')
+            df.to_csv('precio_bitcoin_viernes_16_dic.csv')
             prediccion_arima, pre_arima_futura = modelo_arima(df[-100:], 120)
-            pre_arima_futura.predicted_mean.plot(ax=ax1, label='prediccion_Sarimax', style='o', alpha=.7, color='r')
+            pre_arima_futura.predicted_mean.plot(ax=ax1, label='prediccion_Sarimax', alpha=.7, color='r')
             prediccion_train, prediccion_test, y_train, y_test, resultados = modelo_mlp(df[-100:], 10, 6, 0.8)
             ax1.plot(resultados['time'], resultados['Value_pre'], label='Prediccion_red_neuronal', alpha=.7)
-
-            df.to_csv('precio_bitcoin_viernes_16_dic.csv')
-
-
-    ax1.legend()
-    ax2.legend()
-
-    plt.show()
+            ax1.legend()
+            ax2.legend()
+            plt.show()
 
 
 
-    time.sleep(16)
+
+
+
+
+
+    if not paso:
+       time.sleep(20)
+    else:
+       time.sleep(16)
 
 
 
