@@ -14,12 +14,6 @@ df.drop(['time.1'],axis=1)
 prediccion_train,prediccion_test,y_train,y_test,resultados=modelo_mlp(df,10,10,0.8)
 
 
-
-
-
-
-
-
 df['time'] = pd.to_datetime(df.index, format='%Y-%m-%d %H:%M:%S')
 
 

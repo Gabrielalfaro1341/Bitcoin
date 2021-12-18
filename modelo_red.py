@@ -43,8 +43,6 @@ def grid_mlp(X, Y):
 def modelo_mlp(df,look_back,numero_predicciones,fracc):
     #modelo
 
-
-
 #Preparacion de datos
     scaler=MinMaxScaler()
     df['scale_last'] = scaler.fit_transform(df['last'].values.reshape(-1, 1))
@@ -116,10 +114,7 @@ def modelo_mlp(df,look_back,numero_predicciones,fracc):
     lista_tiempo=list()
 
     #preficcion futura
-    new_datetime = timedelta(seconds=20
-                             )
-
-
+    new_datetime = timedelta(seconds=20)
 
     date_time_obj = dataframe_x_test.iloc[-1]['time']+new_datetime
 
@@ -137,14 +132,6 @@ def modelo_mlp(df,look_back,numero_predicciones,fracc):
     dataframe_prediccion = pd.DataFrame(zip(lista_tiempo, resultados), columns=['time', 'Value_pre_sca'])
     dataframe_prediccion['Value_pre']=scaler.inverse_transform(dataframe_prediccion['Value_pre_sca'].values.reshape(-1, 1))
     dataframe_prediccion['time'] = pd.to_datetime(dataframe_prediccion['time'], format='%Y-%m-%d %H:%M:%S')
-
-
-
-
-
-
-
-
 
 
     return dataframe_x_train,dataframe_x_test,y_train,y_test,dataframe_prediccion
