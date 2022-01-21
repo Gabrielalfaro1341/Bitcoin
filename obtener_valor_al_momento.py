@@ -47,7 +47,7 @@ while validador==True:
         if len(df_diff)>100:
             paso=True
             df = df.asfreq(freq='20S', method='bfill')
-            df.to_csv('precio_bitcoin_viernes_16_dic.csv')
+            df.to_csv('precio_bitcoin_viernes_21_dic.csv')
             prediccion_arima, pre_arima_futura = modelo_arima(df[-100:], 120)
             pre_arima_futura.predicted_mean.plot(ax=ax1, label='prediccion_Sarimax', alpha=.7, color='r')
             prediccion_train, prediccion_test, y_train, y_test, resultados = modelo_mlp(df[-100:], 10, 6, 0.8)

@@ -121,7 +121,7 @@ def modelo_mlp(df,look_back,numero_predicciones,fracc):
 
 
 
-    date_time_obj = dataframe_x_test.iloc[-1]['time']+new_datetime
+    date_time_obj = dataframe_x_test.iloc[-1]['time']
 
 
     for i in range(0,numero_predicciones):
