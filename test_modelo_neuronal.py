@@ -18,12 +18,6 @@ df_graf.drop(['time.1'],axis=1)
 prediccion_train,prediccion_test,y_train,y_test,resultados=modelo_mlp(df,40 ,100,0.9)
 
 
-
-
-
-
-
-
 df['time'] = pd.to_datetime(df.index, format='%Y-%m-%d %H:%M:%S')
 df_graf['time'] = pd.to_datetime(df_graf.index, format='%Y-%m-%d %H:%M:%S')
 
